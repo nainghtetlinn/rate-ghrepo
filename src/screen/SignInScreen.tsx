@@ -1,14 +1,40 @@
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, View, Button } from "react-native";
 import React from "react";
+import { Formik } from "formik";
 
-import Screen from "../components/Screen";
+import AppTextInput from "../components/AppTextInput";
+import theme from "../config/theme";
 
 export default function SignInScreen() {
+  const onSubmit = (values: any) => {
+    console.log(values);
+  };
+
   return (
-    <Screen>
-      <Text>SignInScreen</Text>
-    </Screen>
+    <Formik initialValues={{ username: "", password: "" }} onSubmit={onSubmit}>
+      {({ handleChange, handleSubmit, values }) => (
+        <View style={styles.container}>
+          <AppTextInput
+            onChangeText={handleChange("username")}
+            value={values.username}
+            placeholder="Username"
+          />
+          <AppTextInput
+            onChangeText={handleChange("password")}
+            value={values.password}
+            placeholder="Password"
+          />
+          <Button title="Submit" onPress={() => handleSubmit()} />
+        </View>
+      )}
+    </Formik>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    gap: 10,
+    padding: 10,
+    backgroundColor: theme.colors.white,
+  },
+});
