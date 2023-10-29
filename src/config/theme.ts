@@ -3,10 +3,14 @@ export default {
     textPrimary: "#24292e",
     textSecondary: "#586069",
     primary: "#0366d6",
+    bgPrimary: "#e1e4e8",
+    bgSecondary: "#24292e",
+    white: "#fff",
   },
   fontSizes: {
     body: 14,
     subheading: 16,
+    heading: 20,
   },
   fonts: {
     main: "System",

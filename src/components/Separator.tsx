@@ -7,7 +7,6 @@ export default function Separator() {
 
 const styles = StyleSheet.create({
   separator: {
-    height: 1,
-    backgroundColor: "#000",
+    height: 10,
   },
 });

@@ -14,7 +14,7 @@ export default function AppText({
   children?: React.ReactNode;
   style?: StyleProp<ViewStyle>;
   color?: "primary" | "textSecondary" | "textPrimary";
-  fontSize?: "subheading" | "body";
+  fontSize?: "subheading" | "body" | "heading";
   fontWeight?: "normal" | "bold";
 }) {
   return (
@@ -24,6 +24,7 @@ export default function AppText({
         color === "textSecondary" && styles.colorTextSecondary,
         color === "primary" && styles.colorPrimary,
         fontSize === "subheading" && styles.fontSizeSubheading,
+        fontSize === "heading" && styles.fontSizeHeading,
         fontWeight === "bold" && styles.fontWeightBold,
         style,
       ]}
@@ -48,6 +49,9 @@ const styles = StyleSheet.create({
   },
   fontSizeSubheading: {
     fontSize: theme.fontSizes.subheading,
+  },
+  fontSizeHeading: {
+    fontSize: theme.fontSizes.heading,
   },
   fontWeightBold: {
     fontWeight: theme.fontWeights.bold,

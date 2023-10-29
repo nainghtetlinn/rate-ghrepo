@@ -1,10 +1,14 @@
-import { StyleSheet, FlatList, View } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 import React from "react";
+import type { repoType } from "../@types/repository";
 
 import Screen from "../components/Screen";
+import AppBar from "../components/AppBar";
 import Separator from "../components/Separator";
+import RepositoryItem from "../components/RepositoryItem";
+import theme from "../config/theme";
 
-const repositories = [
+const repositories: repoType[] = [
   {
     id: "jaredpalmer.formik",
     fullName: "jaredpalmer/formik",
@@ -53,16 +57,19 @@ const repositories = [
 
 export default function RepositoryListScreen() {
   return (
-    <Screen>
+    <Screen style={styles.container}>
+      <AppBar />
       <FlatList
         data={repositories}
         ItemSeparatorComponent={Separator}
-        renderItem={({ item }) => {
-          return <View></View>;
-        }}
+        renderItem={({ item }) => <RepositoryItem item={item} />}
       />
     </Screen>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: theme.colors.bgPrimary,
+  },
+});

@@ -1,21 +1,30 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import type { RootStackParamList } from "./src/@types/navigation";
 
-import Screen from "./src/components/Screen";
-import AppText from "./src/components/AppText";
+import RepositoryListScreen from "./src/screen/RepositoryListScreen";
+import SignInScreen from "./src/screen/SignInScreen";
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
-    <Screen style={styles.container}>
-      <AppText>Hello React Native</AppText>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="RepoList"
+            component={RepositoryListScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="SignIn" component={SignInScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
       <StatusBar style="auto" />
-    </Screen>
+    </>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+const styles = StyleSheet.create({});
