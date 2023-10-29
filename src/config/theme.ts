@@ -6,6 +6,7 @@ export default {
     bgPrimary: "#e1e4e8",
     bgSecondary: "#24292e",
     white: "#fff",
+    red: "#d73a4a",
   },
   fontSizes: {
     body: 14,

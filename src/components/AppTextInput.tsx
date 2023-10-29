@@ -4,10 +4,14 @@ import type { TextInputProps } from "react-native";
 
 import theme from "../config/theme";
 
-export default function AppTextInput(props: TextInputProps) {
+interface Props extends TextInputProps {
+  error?: boolean;
+}
+
+export default function AppTextInput({ error, ...otherProps }: Props) {
   return (
-    <View style={styles.container}>
-      <TextInput {...props} />
+    <View style={[styles.container, error && styles.error]}>
+      <TextInput {...otherProps} />
     </View>
   );
 }
@@ -17,5 +21,8 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.white,
     padding: 5,
     borderWidth: 1,
+  },
+  error: {
+    borderColor: theme.colors.red,
   },
 });
