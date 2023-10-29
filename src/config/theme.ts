@@ -1,3 +1,5 @@
+import { Platform } from "react-native";
+
 export default {
   colors: {
     textPrimary: "#24292e",
@@ -14,7 +16,7 @@ export default {
     heading: 20,
   },
   fonts: {
-    main: "System",
+    main: Platform.select({ android: "Roboto", ios: "Arial" }),
   },
   fontWeights: {
     normal: "400",
