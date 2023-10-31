@@ -6,6 +6,7 @@ import * as yup from "yup";
 import AppTextInput from "../components/AppTextInput";
 import ErrorMessage from "../components/ErrorMessage";
 import theme from "../config/theme";
+import useSignIn from "../hooks/useSignIn";
 
 const validationSchema = yup.object().shape({
   username: yup.string().required("Username required"),
@@ -13,8 +14,15 @@ const validationSchema = yup.object().shape({
 });
 
 export default function SignInScreen() {
-  const onSubmit = (values: any) => {
-    console.log(values);
+  const { signIn } = useSignIn();
+
+  const onSubmit = async (values: { username: string; password: string }) => {
+    try {
+      const { data } = await signIn(values);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -40,7 +48,10 @@ export default function SignInScreen() {
               value={values.username}
               placeholder="Username"
             />
-            <ErrorMessage error={errors.username} visible={touched.username} />
+            <ErrorMessage
+              error={errors.username}
+              visible={!!(touched.username && errors.username)}
+            />
           </View>
           <View>
             <AppTextInput
@@ -50,7 +61,10 @@ export default function SignInScreen() {
               value={values.password}
               placeholder="Password"
             />
-            <ErrorMessage error={errors.password} visible={touched.password} />
+            <ErrorMessage
+              error={errors.password}
+              visible={!!(touched.password && errors.password)}
+            />
           </View>
           <Button title="Submit" onPress={() => handleSubmit()} />
         </View>

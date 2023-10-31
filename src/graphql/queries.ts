@@ -19,3 +19,11 @@ export const GET_REPOSITORIES = gql`
     }
   }
 `;
+
+export const AUTHENTICATE_USER = gql`
+  mutation ($credentials: AuthenticateInput) {
+    authenticate(credentials: $credentials) {
+      accessToken
+    }
+  }
+`;
