@@ -1,20 +1,15 @@
 import { StyleSheet, FlatList, Text } from "react-native";
 import React from "react";
-import { useQuery } from "@apollo/client";
 
 import Screen from "../components/Screen";
 import AppBar from "../components/AppBar";
 import Separator from "../components/Separator";
 import RepositoryItem from "../components/RepositoryItem";
 import theme from "../config/theme";
-
-import { GET_REPOSITORIES } from "../graphql/queries";
-import { repoType } from "../@types/repository";
+import useRepositories from "../hooks/useRepositiories";
 
 export default function RepositoryListScreen() {
-  const { data, loading } = useQuery(GET_REPOSITORIES);
-
-  const repositories = data?.repositories?.edges;
+  const { repositories, loading } = useRepositories();
 
   return (
     <Screen style={styles.container}>
@@ -25,7 +20,7 @@ export default function RepositoryListScreen() {
         <FlatList
           data={repositories}
           ItemSeparatorComponent={Separator}
-          renderItem={({ item }) => <RepositoryItem item={item.node} />}
+          renderItem={({ item }) => <RepositoryItem item={item} />}
         />
       )}
     </Screen>
