@@ -12,13 +12,13 @@ export default function RepositoryItem({ item }: { item: repoType }) {
   return (
     <View style={styles.container}>
       <View style={styles.itemContainer}>
-        <View style={styles.imageContainer}>
-          <Image source={{ uri: item.ownerAvatarUrl }} style={styles.image} />
-        </View>
+        <Image source={{ uri: item.ownerAvatarUrl }} style={styles.image} />
+
         <View style={styles.detailsContainer}>
           <AppText fontWeight="bold">{item.fullName}</AppText>
           <AppText color="textSecondary">{item.description}</AppText>
           <View style={styles.tagContainer}>
+            {/* @ts-ignore */}
             <AppText style={styles.tag}>{item.language}</AppText>
           </View>
         </View>
@@ -40,17 +40,18 @@ export default function RepositoryItem({ item }: { item: repoType }) {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 20, backgroundColor: theme.colors.white },
-  itemContainer: { flexDirection: "row" },
-  imageContainer: { marginRight: 20 },
+  container: { backgroundColor: theme.colors.white, padding: 15 },
+  itemContainer: { flexDirection: "row", gap: 20 },
   image: { width: 40, height: 40, borderRadius: 4, overflow: "hidden" },
-  detailsContainer: { gap: 5 },
-  tagContainer: { flexWrap: "wrap" },
-  tag: {
+  detailsContainer: { alignItems: "flex-start", gap: 5, flex: 1 },
+  tagContainer: {
     backgroundColor: theme.colors.primary,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5,
+  },
+  tag: {
     color: theme.colors.white,
-    padding: 10,
-    borderRadius: 4,
   },
   featureCardContainer: {
     flexDirection: "row",
