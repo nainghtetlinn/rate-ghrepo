@@ -19,7 +19,7 @@ export default function SignInScreen() {
   const onSubmit = async (values: { username: string; password: string }) => {
     try {
       const { data } = await signIn(values);
-      console.log(data);
+      console.log(data?.authenticate?.accessToken);
     } catch (error) {
       console.log(error);
     }
