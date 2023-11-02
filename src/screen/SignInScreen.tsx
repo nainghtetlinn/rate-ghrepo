@@ -1,7 +1,9 @@
 import { StyleSheet, View, Button } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import { Formik } from "formik";
 import * as yup from "yup";
+import type { SignInType } from "../@types/navigation";
 
 import AppTextInput from "../components/AppTextInput";
 import ErrorMessage from "../components/ErrorMessage";
@@ -15,11 +17,12 @@ const validationSchema = yup.object().shape({
 
 export default function SignInScreen() {
   const { signIn } = useSignIn();
+  const navigation = useNavigation<SignInType["navigation"]>();
 
   const onSubmit = async (values: { username: string; password: string }) => {
     try {
-      const { data } = await signIn(values);
-      console.log(data?.authenticate?.accessToken);
+      await signIn(values);
+      navigation.navigate("RepoList");
     } catch (error) {
       console.log(error);
     }
@@ -47,6 +50,7 @@ export default function SignInScreen() {
               onBlur={() => setFieldTouched("username")}
               value={values.username}
               placeholder="Username"
+              autoCapitalize="none"
             />
             <ErrorMessage
               error={errors.username}
@@ -60,6 +64,8 @@ export default function SignInScreen() {
               onBlur={() => setFieldTouched("password")}
               value={values.password}
               placeholder="Password"
+              autoCapitalize="none"
+              secureTextEntry={true}
             />
             <ErrorMessage
               error={errors.password}
